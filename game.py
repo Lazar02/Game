@@ -2,33 +2,33 @@ from turtle import *
 from freegames import line
 
 def Grid():
-    "Draw tic-tac-toe grid."
+   
     line(-67, 200, -67, -200)
     line(67, 200, 67, -200)
     line(-200, -67, 200, -67)
     line(-200, 67, 200, 67)
 
 def Drawx(x, y):
-    "Draw X player."
+ 
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
 
 def drawo(x, y):
-    "Draw O player."
+  
     up()
     goto(x + 67, y + 5)
     down()
     circle(62)
 
 def floor(value):
-    "Round value down to grid with square size 133."
+  
     return ((value + 200) // 133) * 133 - 200
 
 state = {'player': 0}
 players = [drawx, drawo]
 
 def tap(x, y):
-    "Draw X or O in tapped square."
+  
     x = floor(x)
     y = floor(y)
     player = state['player']
