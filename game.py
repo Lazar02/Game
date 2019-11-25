@@ -1,46 +1,42 @@
-from turtle import *
-from freegames import line
+import pygame
+pygame.init()
 
-def Grid():
-   
-    line(-67, 200, -67, -200)
-    line(67, 200, 67, -200)
-    line(-200, -67, 200, -67)
-    line(-200, 67, 200, 67)
+window = pygame.display.set_mode((500, 500))
 
-def Drawx(x, y):
- 
-    line(x, y, x + 133, y + 133)
-    line(x, y + 133, x + 133, y)
+pygame.display.set_caption("first game")
 
-def drawo(x, y):
-  
-    up()
-    goto(x + 67, y + 5)
-    down()
-    circle(62)
+screenwidth = 500
 
-def floor(value):
-  
-    return ((value + 200) // 133) * 133 - 200
+x = 10
+y = 450
+width = 20
+height = 20
+vel = 20
 
-state = {'player': 0}
-players = [drawx, drawo]
+run = True
+while run:
+    pygame.time.delay(100)
 
-def tap(x, y):
-  
-    x = floor(x)
-    y = floor(y)
-    player = state['player']
-    draw = players[player]
-    draw(x, y)
-    update()
-    state['player'] = not player
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+    
+    keys = pygame.key.get_pressed()
 
-setup(420, 420, 370, 0)
-hideturtle()
-tracer(False)
-Grid()
-update()
-onscreenclick(tap)
-done()
+    if keys[pygame.K_LEFT] and x > vel:
+        x -= vel
+    if keys[pygame.K_RIGHT] and x < 500 - width - vel:
+        x += vel
+    if keys[pygame.K_UP]and y > vel:
+        y -= vel
+    if keys[pygame.K_DOWN]and y < 500 - width - vel:
+        y += vel
+
+    
+    window.fill((0, 0, 0))
+    pygame.draw.rect(window, (200, 23, 255), (x, y, width, height))
+    pygame.draw.rect(window, (200, 0, 0), (30, 400, width, height))
+    pygame.display.update()   
+
+pygame.quit()         
+
